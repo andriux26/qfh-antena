@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="de">
+ <head>
+  <meta charset="utf-8">
+  <title>Vierdraht Helicoidal Antenne - Javascript Rechner</title>
+  <link href="default_style.css" rel="stylesheet" type="text/css">
+  <meta name="author" content="John Coppens">
+  <meta name="keywords" content="john coppens on6jc lw3haz antenna helicoidal calculadora java javascript cuadrifilar
+   satellite meteorological design">
+  <meta name="description" content="Verfassungsbeschreibung für einer vierdraht
+   helicoidal Antenne. Dieses Modell ist für meteorological Satelliten,
+   aber ein Javarechner ist zur Verfügung zur Anpassung der Bemessungen.
+   Aufbau ist billig, und Materialen sind einfach zu bekommen.">
+   <link href="styles.css" rel="stylesheet" type="text/css">
+   <link href="styles_2.css" rel="stylesheet" type="text/css">
+ </head>
+
+ <body>
+ <div class=spheader>
+  <img src="http://jcoppens.com/ant/qfh/img/hdr.de.jpeg" width=650 height=150>
+ </div>
+ <div class=spmain>
+  <img src="wmark.jpeg" >
+ </div>
+ <div class=spcol>
+ <a href="index.htm">Home</a><br>
+ &nbsp;&nbsp;<a href="index.en_2.htm">Antennen</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/index.de.php">QFH</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rechner<br>
+<p>
+ Sprache:
+<br>
+ &nbsp;&nbsp;<a href="calc.htm">Español</a><br>
+ &nbsp;&nbsp;<a href="calc.en.htm">English</a><br>
+<p>
+ QFH<br>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/index.de.php">Einleitung</a><br>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/adapt.de.php">Anschluess</a><br>
+<p>
+ &nbsp;&nbsp;<b>Rechner</b><br>
+<p>
+ &nbsp;&nbsp;Simulations<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/sim.de.php">Abmessung</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/sim_gp.de.php">Grundfläche</a><br>
+<p>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/versions.de.php">Bilder</a><br>
+<p>
+ &nbsp;&nbsp;Gleichartig<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="index_2.htm">Einfache helix</a><br>
+ </div>
+ <script src="qfhcalc.js"> </script>
+ <div class=spmain>
+  <form action="http://jcoppens.com/ant/qfh/calcplot.de.php" method=GET>
+  <h2 class="section">  <a name="inp"></a>
+  Daten einführen</h2>
+  <p>
+<div style="border: solid #333333 1px; padding: 4px; margin-top: 2px">
+<font color=green size=+1>Thanks to suggestions of Kevin and
+    Barry Fittler, and the insistence of many others, I've finally made a
+    bit of time to do 'repair work' on the calculator. Please report problems,
+    if any.</font></div>
+  <p>
+  <form action="http://jcoppens.com/ant/qfh/calcplot.de.php">
+   <table class="simple" cellspacing=1 >
+    <tr >
+    <td class="simple" >
+    Entwurfsfrequenz
+    </td>
+    <td class="simple" >
+    <INPUT type=text name=freq maxlength=10 size=10
+         value="137.5" onchange="compute(this.form)"> MHz
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Wendungzahl
+    </td>
+    <td class="simple" >
+    <SELECT name=turns onchange="compute(this.form)">
+         <OPTION value="0.25">0.25
+         <OPTION value="0.5" selected>0.5
+         <OPTION value="0.75">0.75
+         <OPTION value="1.0">1.0
+         </SELECT>
+
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Länge ein Wendung
+    </td>
+    <td class="simple" >
+    <SELECT name=nrwavel onchange="compute(this.form)">
+         <OPTION selected value=1>1
+         </SELECT> Wellenlange
+
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Biegedurchmesser
+    </td>
+    <td class="simple" >
+    <INPUT type=text name=wrad maxlength=6 size=6
+         value="15"  onchange="compute(this.form)"> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Leiterdurchmesser
+    </td>
+    <td class="simple" >
+    <INPUT type=text name=wdiam maxlength=5 size=5
+         value="7" onchange="compute(this.form)"> mm (Optimalwert: <a id=optdiam>-</a> mm)
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Durchmess/Höhe verhalten
+    </td>
+    <td class="simple" >
+    <INPUT type=text name=ratio maxlength=5 size=5
+         value="0.44" onchange="compute(this.form)">
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <INPUT type=button onclick="compute(this.form)" value=Rechnen
+         onchange="compute(this.form)">
+    </td>
+   </tr>
+  </table>
+  <p>
+  <h2 class="section">  <a name="res"></a>
+  Ergebnisse</h2>
+  <p>
+   <table class="simple" cellspacing=1 >
+    <tr >
+    <td class="simple" align=center>
+    Wellenlange
+    </td>
+    <td class="simple" align=center>
+    <a id=wavel>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Kompensierte Wellenlange
+    </td>
+    <td class="simple" align=center>
+    <a id=wavelc>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Biegekompensierung
+    </td>
+    <td class="simple" align=center>
+    <a id=bcorr>-</a> mm
+    </td>
+   </tr>
+  </table>
+  <p>
+  <img src="qfh1am.jpg" align=left>
+  <b>Außeres Quadrat</b>
+   <table class="simple" cellspacing=1 style="width: 70%">
+    <tr >
+    <td class="simple" >
+    Gesammtlänge
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=total1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Vertikalabstandhalter
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=vert1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Kompensierte Gesammtlänge
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=total1c>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Kompensierte Vertikaltrennung
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=vert1c>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Antennehöhe
+    </td>
+    <td class="simple" >
+    <b>H1=</b>
+    </td>
+    <td class="simple" >
+    <a id=height1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Innere Dürchmeßer
+    </td>
+    <td class="simple" >
+    <b>Di1=</b>
+    </td>
+    <td class="simple" >
+    <a id=idiam1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Horizontaltrenner
+    </td>
+    <td class="simple" >
+    <b>D1=</b>
+    </td>
+    <td class="simple" >
+    <a id=rad1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Kompensierte Horizontaltrenner
+    </td>
+    <td class="simple" >
+    <b>Dc1=</b>
+    </td>
+    <td class="simple" >
+    <a id=rad1c>-</a> mm
+    </td>
+   </tr>
+  </table>
+  <INPUT type=hidden name=height1val id=height1val>
+  <br clear=left>
+  <p>
+  <img src="qfh2am.jpg" align=left>
+  <b>Inneres Quadrat</b>   <table class="simple" cellspacing=1 style="width: 70%">
+    <tr >
+    <td class="simple" align=center>
+    Gesammtlänge
+    </td>
+    <td class="simple" align=center>
+    <br>
+    </td>
+    <td class="simple" align=center>
+    <a id=total2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Vertikalrohr
+    </td>
+    <td class="simple" align=center>
+    <br>
+    </td>
+    <td class="simple" align=center>
+    <a id=vert2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Kompensierte Gesammtlänge
+    </td>
+    <td class="simple" align=center>
+    <br>
+    </td>
+    <td class="simple" align=center>
+    <a id=total2c>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Kompensierte Vertikaltrenner
+    </td>
+    <td class="simple" align=center>
+    <br>
+    </td>
+    <td class="simple" align=center>
+    <a id=vert2c>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Antennehöhe
+    </td>
+    <td class="simple" align=center>
+    <b>H2=</b>
+    </td>
+    <td class="simple" align=center>
+    <a id=height2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Innere Dürchmeßer
+    </td>
+    <td class="simple" align=center>
+    <b>Di2=</b>
+    </td>
+    <td class="simple" align=center>
+    <a id=idiam2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Horizontaltrenner
+    </td>
+    <td class="simple" align=center>
+    <b>D2=</b>
+    </td>
+    <td class="simple" align=center>
+    <a id=rad2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" align=center>
+    Kompensierte Horizontaltrenner
+    </td>
+    <td class="simple" align=center>
+    <b>Dc2=</b>
+    </td>
+    <td class="simple" align=center>
+    <a id=rad2c>-</a> mm
+    </td>
+   </tr>
+  </table>
+  <INPUT type=hidden name=height2val id=height2val>
+  <br clear=left>
+  <h2 class="section">  Zeichenschablone generieren</h2>
+  <p>
+  Habe Sie gern eine Zeichenschablone auf PDF Format, dan gerne
+    die folgenden extra Daten:  <p>
+   <table class="simple" cellspacing=1 class=simple cellspacing=1>
+    <tr >
+    <td class="simple" class=simple>
+    Unterstützungsrohre Vertical (Diam):
+    </td>
+    <td class="simple" class=simple>
+    <input type=text name=xdiam size=10> mm
+    </td>
+    <td class="simple" class=simple>
+    <br>
+    </td>
+</tr>
+<tr >
+    <td class="simple" class=simple>
+    Unterstützungsrohre Horizontal (Diam):
+    </td>
+    <td class="simple" class=simple>
+    <input type=text name=hdiam size=10> mm
+    </td>
+    <td class="simple" class=simple>
+    <br>
+    </td>
+</tr>
+<tr >
+    <td class="simple" class=simple>
+    Papier größe wahlen:
+    </td>
+    <td class="simple" class=simple>
+    <select papersize>
+  <option value="A4" selected>A4 (210x297 mm)
+  <option value="A3">A3 (297x420 mm)
+  <option value="A2">A2 (420x595 mm)
+  <option value="letter">letter
+  <option value="legal">legal
+</select>
+
+    </td>
+    <td class="simple" class=simple>
+    <input type=submit name=submit value=" PDF generieren ">
+    </td>
+   </tr>
+  </table>
+  <p>
+  </form>
+  <h2 class="section">  <a name="ley"></a>
+  Erklärung</h2>
+  <p>
+  Diese Rechner produziert viele Daten! Bitte die richte Daten
+    verwenden.
+    <p>
+    Hier folgt eine (kleine) Erklärung:
+    <p>
+    <dl>
+      <dt><a name="freq"><b>Entwurfsfrequenz</b></a></dt>
+      <dd>Selbsterklärend?</dd>
+      <dt><a name="turns"><b>Wendungszahl</b></a></dt>
+      <dd>Wieviel mal ist die Antenna gedreht? (normalerweise 0.5 oder 1 Wendungen)</dd>
+      <dt><a name="nrwavel"><b>Länge einer Wendung</b></a></dt>
+      <dd>Es gibt verschiedene Ausgaben dieser Antenne. üblich ist 1 Wellenlänge, aber es gibt Versionen mit 1.5 order sogar 2 Wellenlänge.</dd>
+      <dt><a name="wrad"><b>Biegedürchmesser</b></a></dt>
+      <dd>Da es unmöglich ist, die Ecke bei 90 Grad  zu verbiegen, ist dieser Wert für die Berechnungen erforderlich. Es ist das Maß von der verbiegenden Mitte zur Mitte des Rohres.</dd>
+      <dt><a name="diam"><b>Leiterdurchmesser</b></a></dt>
+      <dd>Externer Durchmesser des Rohres- oder Koaxialitätskabels (in diesem Fall, Durchmesser der Abschirmung ohne Abisolierung)</dd>
+      <dt><a name="ratio"><b>Durchmesser/Höhe Verhältnis</b></a></dt>
+      <dd>Am häufigsten ist dieses Verhältnis 0,44, aber etwas niedrigere Werte (0,3 bis 0,4) ergeben bessere Horizontdeckung.</dd>
+      <dt><a name="wavelc"><b>Ausgeglichene Wellenlänge</b></a></dt>
+      <dd>Wellenlänge, ausgeglichen entsprechend dem Leiterdurchmesser.</dd>
+      <dt><a name="bcorr"><b>Verbiegende Korrektur</b></a></dt>
+      <dd>der benötigte Korrekturwert  entsprechend dem zu biegenden Durchmessers.</dd>
+      <dt><a name="total1"><b>Ausgeglichene Gesamtlänge</b></a></dt>
+      <dd>Gesamtlänge der Schleife, kompensiert den  Effekt, und die Tatsache, daß die Schleife etwas größer (oder kleiner) sein muß.</dd>
+      <dt><a name="vert1c"><b>Ausgeglichener vertikaler Leiter</b></a></dt>
+      <dd>Länge des vertikalen Leiters ('ungebogen ').</dd>
+      <dt><a name=""><b>Ausgeglichene Horizontaltrennung</b></a></dt>
+      <dd>Das is das Horizontalteil der Antenne - ungebogen, und stimmt Úberein mit die Rohrlänge der Horizontalunterstutzungen.</dd>
+      <dt><a name=""><b>Höhe der Antenne</b></a></dt>
+      <dd>Höhe des Schleifes (schon gedreht).</dd>
+      <dt><a name=""><b>Innere Durchmesser</b></a></dt>
+      <dd>Imginäre Zylinderdurchmesser worauf mann die Schleife drehen sollte.</dd>
+    </dl>
+  <hr>
+   <table width="100%">
+    <tr >
+    <td align=left>
+     <small>(c) John Coppens ON6JC/LW3HAZ</small>    </td>
+    <td align=right>
+     <a href="http://jcoppens.com/misc/mail.php" class=links><small>post</small></a>    </td>
+   </tr>
+  </table>
+ </div>
+ </body>
+</html>

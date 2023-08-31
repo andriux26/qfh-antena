@@ -1,0 +1,62 @@
+program Gas;
+
+const
+  x_size = 30;
+  y_size = 18;
+  nrMol  = 10;
+
+var
+  s: semaphore;
+
+procedure DrawChamber;
+var
+  i: integer;
+begin
+  clrscr;
+  gotoxy(2, 2);
+  for i := 1 to x_size+2 do write('*');
+  for i := 1 to y_size do begin
+    gotoxy(2, 2+i); write('*', ' ':x_size, '*');
+  end;
+  gotoxy(2, 3+y_size);
+  for i := 1 to x_size+2 do write('*');
+end;
+
+process type Molecule(id: char);
+var
+  x, y, px, py,
+  dx, dy, i, j: integer;
+begin
+  px := 0; py := 0;
+  x := random(x_size) + 1; y := random(y_size) + 1;
+  dx := random(2) - 2; dy := random(2) - 1;
+  i := 0;
+  repeat
+    if (x + dx) < 1 then dx := 1;
+    if (x + dx) > x_size then dx := -1;
+    if (y + dy) < 1 then dy := 1;
+    if (y + dy) > y_size then dy := -1;
+    px := x; x := x + dx;
+    py := y; y := y + dy;
+
+    wait(s);
+{       gotoxy(px+2, py+2); write(chr(ord(id)+32)); }
+      gotoxy(px+2, py+2); write(' ');
+      gotoxy(x+2, y+2); write(id);
+    signal(s);
+    sleep(5);
+  forever;
+end;
+
+var
+  Mol: array [1..nrMol] of Molecule;
+  id: integer;
+
+begin
+  DrawChamber;
+  initial(s, 1);
+  cobegin
+    for id := 1 to nrMol do
+      Mol[id](chr(64+id));
+  coend;
+end.

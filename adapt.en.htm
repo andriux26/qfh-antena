@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <title>Quadrifilar helicoidal antenna - Adapting/Connecting to the feed cable</title>
+  <link href="default_style.css" rel="stylesheet" type="text/css">
+  <meta name="author" content="John Coppens">
+  <meta name="keywords" content="john coppens on6jc lw3haz antenna helicoidal calculadora java javascript cuadrifilar
+   satellite meteorological design">
+  <meta name="description" content="Description of the construction of a quadrifilar
+   helicoidal antenna. This model is for meteorological satellites,
+   but a calculator is provided to adapt measure to other frequencies.
+   Construction is cheap, and materials are easily available.">
+   <link href="styles.css" rel="stylesheet" type="text/css">
+   <link href="styles_2.css" rel="stylesheet" type="text/css">
+ </head>
+
+ <body>
+ <div class=spheader>
+  <img src="hdr.en.jpeg" width=650 height=150>
+ </div>
+ <div class=spmain>
+  <img src="wmark.jpeg" >
+ </div>
+ <div class=spcol>
+ <a href="index.htm">Home</a><br>
+ &nbsp;&nbsp;<a href="index.en_2.htm">Antennas</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="index.en.htm">QFH</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adapting<br>
+<p>
+ Language:
+<br>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/adapt.php">Español</a><br>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/adapt.de.php">Deutsch</a><br>
+<p>
+ QFH<br>
+ &nbsp;&nbsp;<a href="index.en.htm">Introduction</a><br>
+ &nbsp;&nbsp;<b>Matching</b><br>
+<p>
+ &nbsp;&nbsp;<a href="calc.en.htm">Calculator</a><br>
+<p>
+ &nbsp;&nbsp;Simulations<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim.en.htm">Dimensions</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="sim_gp.en.htm">Groundplane</a><br>
+<p>
+ &nbsp;&nbsp;<a href="versions.en.htm">Pictures</a><br>
+<p>
+ &nbsp;&nbsp;Related:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="index_2.htm">Simple helicoidal</a><br>
+ </div>
+ <div class=spmain>
+  <h2 class="section">  Adapting/Connecting to the feed cable</h2>
+  <a href="http://jcoppens.com/ant/qfh/img/g3lmo/002.jpeg"><img src="http://jcoppens.com/ant/qfh/icon/g3lmo/002.jpeg" title="Nev's stealth QFH" align=left border=0></a>
+The QFH consists of two loops. To obtain a circular polarization,
+    it is necessary that the currents in both loops have a phase difference
+    of 90 degrees. Though it is possible to make the phase difference
+    with a phasing line (which is popular with the turnstile antenna),
+    the most popular solution for the QFH is to use different loop sizes.
+    This causes the current to be inductive in one, and capacitive in the
+    other.
+    <p>
+    Though the currents in both loops are reactive, connecting them in
+    parallel causes the feedpoint, at the top, to be at nearly 50 Ohm, 
+    resistive.
+    <p>
+    The only problem remaining, is that the feedpoint, as with most antennas,
+    is symmetrical. This means we shouldn't connect a coax cable (asymmetric)
+    at this point. Though the antenna will be adapted, currents on the
+    outside of the cable will offset the radiation pattern of the antenna.
+    <p>
+    Several solutions exist:
+    <ul>
+     <li><b>Transformer</b>
+       We could install a balun transformer at the top, but simple baluns
+       transform impedance too - we want to maintain 50 Ohms.
+     <li><b>Choke</b>  
+       Applying a couple of turns to the coax cable at the top will make
+       the braid act as an RFC choke and block outside currents.
+     <li><b>Infinite balun</b>
+       Feeding the cable through one of the loop sides, will form an
+       'infinite balun'.
+     <li><b>Preamplifier</b>
+       Another - elegant - solution would be to install a preamplifier at
+       the top, and design it for symmetrical input. As far as I know,
+       none are on the market, so we'd have to make our own...
+    </ul>
+    Finally, using simply two loops, without the strange 'twist' which is
+    so typical of the QFH, would generate a much more directional (vertical)
+    radiation pattern. Also, the polarization would turn to linear near the
+    horizon.
+    <p>
+    The 'twist' generates the desired hemispherical pattern, which 
+    permits us to hear from horizon to horizon.
+    <h2 class="section">  <a name="choke"></a>
+  Choke baluns</h2>
+   <table >
+    <tr >
+    <td valign=top>
+    <a href="http://jcoppens.com/ant/qfh/img/on7eq/005.jpeg"><img src="http://jcoppens.com/ant/qfh/icon/on7eq/005.jpeg" title="ON7EQ QFH antenna balun" border=0></a>
+<i>ON7EQ's QFH with balun</i>
+    </td>
+    <td valign=top>
+    A simple solution for eliminating the exterior cable currents, is
+    to wind the cable a number of times around the vertical support,
+    making the outside act as an RF coke (inductor).
+    <p>
+    The diameter should be as small as is practical, to reduce radiation
+    as much as possible. The number of turns depends on the diameter,
+    of course, but the inductance should be large enough (compared to
+    50 Ohm) to reduce the outside currents.
+    <p>
+    The windings should be as near to the top as possible, to reduce
+    the length of the radiating parts.
+   
+    </td>
+   </tr>
+  </table>
+  <h2 class="section">  <a name="inf"></a>
+  Infinite baluns</h2>
+   <table >
+    <tr >
+    <td valign=top>
+    <a href="http://jcoppens.com/ant/qfh/img/v2/012.jpeg"><img src="http://jcoppens.com/ant/qfh/icon/v2/012.jpeg" "QFH infinite balue connections" border=0></a>
+<i>Infinite balun</i>
+    </td>
+    <td valign=top>
+    Many questions arise about the infinite baluns...
+    <p>
+    The impedance at the top is the one we want at the bottom too. So
+    we cannot tolerate impedance transformation through the balun. This
+    means we <i>have</i> to use a cable with the same impedance - else
+    there would be a transformation!
+    <p>
+    For UHF and SHF work, the most practical solution is probably to use
+    coax cable for the actual antenna itself. For lower frequencies, we
+    should use tubing, and feed a 50 Ohm cable through it.
+    <p>
+    Part of the infinite balun principle, the cable's braid should be
+    connected to the antenna at the bottom center. In practice I have not
+    been able to detect much difference.
+  
+    </td>
+   </tr>
+  </table>
+  <hr>
+   <table width="100%">
+    <tr >
+    <td align=left>
+     <small>(c) John Coppens ON6JC/LW3HAZ</small>    </td>
+    <td align=right>
+     <a href="mail.en.htm" class=links><small>mail</small></a>    </td>
+   </tr>
+  </table>
+ </div>
+ </body>
+</html>

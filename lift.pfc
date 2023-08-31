@@ -1,0 +1,215 @@
+program Lifts;
+
+const
+  Floors = 12;
+  Red    = 4;
+  Green  = 2;
+  White  = 15;
+  Pass   = 3;
+
+  SPACING = 25;
+
+monitor Screen;
+  export showButton, showDoors;
+
+  procedure showButton(Fl: integer; On: boolean);
+  begin
+    gotoXY(15, 15-Fl);
+    if On then
+      textcolor(Red)
+    else
+      textcolor(Green);
+    write(Fl:2);
+  end;
+
+  procedure showDoors(Flr, Lft, Fase: integer);
+  begin
+    case Lft of
+      1: gotoXY(5, 15-Flr);
+      2: gotoXY(20, 15-Flr);
+    end;
+    textcolor(White);
+    case Fase of
+      0: write('      ');
+      1: write('  []  ');
+      2: write(' [  ] ');
+      3: write('[    ]');
+    end;
+  end;
+
+begin
+end;
+
+
+procedure OpenDoors(Fl, L: integer);
+begin
+  Screen.showDoors(Fl, L, 1);
+  sleep(1);
+  Screen.showDoors(Fl, L, 2);
+  sleep(1);
+  Screen.showDoors(Fl, L, 3);
+  sleep(3);
+end;
+
+procedure CloseDoors(Fl, L: integer);
+begin
+  Screen.showDoors(Fl, L, 2);
+  sleep(1);
+  Screen.showDoors(Fl, L, 1);
+  sleep(1);
+  Screen.showDoors(Fl, L, 0);
+  sleep(1);
+end;
+
+procedure Passing(Fl, L: integer);
+begin
+  Screen.showDoors(Fl, L, 1);
+  sleep(1);
+  Screen.showDoors(Fl, L, 0);
+end;
+
+procedure MoveLift(L: integer; Up: boolean);
+begin
+  sleep(5);
+end;
+
+procedure StopLift(L: integer);
+begin
+  sleep(1);
+end;
+
+procedure Lights(F: integer; On: boolean);
+begin
+  Screen.showButton(F, On);  
+end;
+
+
+resource requests;
+  export Add, Cancel, Enquire;
+
+  var I: integer;
+      Calls: array [1..Floors] of boolean;
+
+  procedure Add(F: integer);
+  begin
+    Calls[F] := true;
+    Lights(F, true);
+  end;
+
+  procedure Cancel(F: integer);
+  begin
+    Calls[F] := false;
+    Lights(F, false);
+  end;
+
+  procedure Enquire(F: integer; var Waiting: boolean);
+  begin
+    Waiting := Calls[F];
+  end;
+
+begin {Requests}
+  for I := 1 to Floors do begin
+    Calls[I] := false;
+    Lights(I, false);
+  end;
+end;  {Requests}
+
+
+process Passengers;
+var
+  F: integer;
+begin
+  repeat
+    F := random(Floors) + 1;
+    Requests.Add(F);
+    sleep(SPACING);
+  until keypressed;
+end;
+
+
+process type Lifts(Num, Start: integer);
+var
+  Buttons: array [1..Floors] of boolean;
+  dirUp: boolean;
+  People, Btn, P, I: integer;
+  Next: integer;
+  Pressed: boolean;
+
+begin
+  Next := Start;
+  if Start > 1 then
+    dirUp := false
+  else
+    dirUp := true;
+
+  for I := 1 to Floors do
+    Buttons[I] := false;
+
+  repeat
+    if dirUp then
+      if Next < Floors then
+        Next := Next + 1
+      else begin
+        Next := Floors - 1;
+        dirUp := false;
+      end
+    else {going down}
+      if Next > 1 then
+        Next := Next - 1
+      else begin
+        Next := 2;
+        dirUp := true;
+      end;
+
+    MoveLift(Num, dirUp);
+    Requests.Enquire(Next, Pressed);
+
+    if Pressed or Buttons[Next] then begin
+      StopLift(Num);
+      Buttons[Next] := false;
+      OpenDoors(Next, Num);
+
+      Requests.Enquire(Next, Pressed);
+      if Pressed then begin
+        People := random(Pass) + 1;
+        for P := 1 to People do begin
+          repeat
+            Btn := random(Floors-1) + 1;
+          until Btn <> Next;
+          Buttons[Btn] := true;
+        end;
+        Requests.Cancel(Next);
+      end;
+
+      Sleep(2);
+      CloseDoors(Next, Num);
+    end
+    else
+      Passing(Next, Num);
+  until keypressed;
+end;  {Lifts}
+
+
+var
+  Lift1, Lift2: Lifts;
+
+
+procedure InitScreen;
+var
+  i: integer;
+begin
+  clrscr;
+  for i := 1 to Floors do begin
+    gotoXY(4, 15-i);
+    writeln('|      |       |      |');
+  end;
+end;
+
+begin
+  InitScreen;
+  cobegin
+    Lift1(1, 1);
+    Lift2(2, floors);
+    Passengers;
+  coend;
+end.

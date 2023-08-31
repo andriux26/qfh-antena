@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="es">
+ <head>
+  <meta charset="utf-8">
+  <title>Antenas - Helicoidal cuadrifiliar - Calculadora Javascript en línea</title>
+  <link href="default_style.css" rel="stylesheet" type="text/css">
+  <meta name="author" content="John Coppens">
+  <meta name="keywords" content="john coppens on6jc lw3haz antena helicoidal calculadora java javascript cuadrifilar
+   satelite meteorologico dise.o">
+  <meta name="description" content="Descripción de la construcción de antenas.
+   En este momento hay dos tipos: una antena helicoidal simple,
+   y una helicoidal cuadrifilar.">
+   <link href="styles.css" rel="stylesheet" type="text/css">
+   <link href="styles_2.css" rel="stylesheet" type="text/css">
+ </head>
+
+ <body>
+ <div class=spheader>
+  <img src="http://jcoppens.com/ant/qfh/img/hdr.jpeg" width=650 height=150>
+ </div>
+ <div class=spmain>
+  <img src="wmark.jpeg" >
+ </div>
+ <div class=spcol>
+ <a href="index.htm">Home</a><br>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/index.php">Antenas</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/index.php">Cuadrifilar</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculadora<br>
+<p>
+ Idioma:
+<br>
+ &nbsp;&nbsp;<a href="calc.en.htm">English</a><br>
+ &nbsp;&nbsp;<a href="calc.de.htm">Deutsch</a><br>
+<p>
+ QFH:<br>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/index.php">Introducción</a><br>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/adapt.php">Adaptación</a><br>
+<p>
+ &nbsp;&nbsp;<b>Calculadora</b><br>
+<p>
+ &nbsp;&nbsp;Simulaciones<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/sim.php">Dimensiones</a><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/sim_gp.php">Plano tierra</a><br>
+<p>
+ &nbsp;&nbsp;<a href="http://jcoppens.com/ant/qfh/versions.php">Imágenes</a><br>
+<p>
+ &nbsp;&nbsp;Relacionado:<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;<a href="index_2.htm">Helicoidal simple</a><br>
+ </div>
+ <script src="qfhcalc.js"> </script>
+ <div class=spmain>
+  <h2 class="section">  <a name="inp"></a>
+  Ingrese los datos</h2>
+  <p>
+  <form action="http://jcoppens.com/ant/qfh/calcplot.php">
+<div style="border: solid #333333 1px; padding: 4px; margin-top: 2px">
+<font color=green size=+1>Gracias a las sugerencias de Kevin
+    y Barry Fittler, y la insistencia de muchos otros, logré de hacer un tiempito
+    para hacer las 'reparaciones' en la calculadora. Por favor reporten problemas,
+    si hay.</font></div>
+  <p>
+   <table class="simple" cellspacing=1 >
+    <tr >
+    <td class="simple" >
+    <a href="calc.htm#freq" >Frecuencia de diseño</a>
+    </td>
+    <td class="simple" >
+    <INPUT type=text name=freq maxlength=10 size=10
+	 value="137.5" onchange="compute(this.form)"> MHz
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#turns" >Cantidad de vueltas</a>
+    </td>
+    <td class="simple" >
+    <SELECT name=turns onchange="compute(this.form)">
+	 <OPTION value="0.25">0.25
+	 <OPTION value="0.5" selected>0.5
+	 <OPTION value="0.75">0.75
+	 <OPTION value="1.0">1.0
+	 </SELECT>
+
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="http://jcoppens.com/ant/qfh/nrwavel" >Largo de una vuelta</a>
+    </td>
+    <td class="simple" >
+    <SELECT name=nrwavel onchange="compute(this.form)">
+	 <OPTION selected value=1>1
+	 </SELECT> largos de onda
+
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#wrad" >Radio del doblado</a>
+    </td>
+    <td class="simple" >
+    <INPUT type=text name=wrad maxlength=6 size=6
+         value="15" onchange="compute(this.form)"> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#diam" >Diámetro del conductor</a>
+    </td>
+    <td class="simple" >
+    <INPUT type=text name=wdiam maxlength=5 size=5
+	 value="7" onchange="compute(this.form)"> mm (valor óptimo: <a id=optdiam>-</a> mm)
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#ratio" >Relación diámetro/altura</a>
+    </td>
+    <td class="simple" >
+    <INPUT type=text name=ratio maxlength=5 size=5
+         value="0.44" onchange="compute(this.form)">
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <INPUT type=button onclick="compute(this.form)" value=Calcular
+	 onchange="compute(this.form)">
+    </td>
+   </tr>
+  </table>
+  <p>
+  <h2 class="section">  <a name="res"></a>
+  Los resultados</h2>
+  <p>
+   <table class="simple" cellspacing=1 >
+    <tr >
+    <td class="simple" >
+    <a href="calc.htm#wavel" >Largo de onda</a>
+    </td>
+    <td class="simple" >
+    <a id=wavel>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="http://jcoppens.com/ant/qfh/@wavelc" >Largo de onda compensado</a>
+    </td>
+    <td class="simple" >
+    <a id=wavelc>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#bcorr" >Corrección por doblado</a>
+    </td>
+    <td class="simple" >
+    <a id=bcorr>-</a> mm
+    </td>
+   </tr>
+  </table>
+  <p>
+  <img src="qfh1am.jpg" align=left>
+  <b>Cuadro grande</b>
+   <table class="simple" cellspacing=1 style="width: 70%">
+    <tr >
+    <td class="simple" >
+    <a href="calc.htm#total1" >Largo total</a>
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=total1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#vert1c" >Separación vertical</a>
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=vert1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#total1c" >Largo total compensado</a>
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=total1c>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#vert1c" >Separación vertical compensada</a>
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=vert1c>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="http://jcoppens.com/ant/qfh/height1" >Altura antena</a>
+    </td>
+    <td class="simple" >
+    <b>H1</b>
+    </td>
+    <td class="simple" >
+    <a id=height1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#idiam1" >Diámetro interno</a>
+    </td>
+    <td class="simple" >
+    <b>Di1</b>
+    </td>
+    <td class="simple" >
+    <a id=idiam1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#ad1" >Separador horizontal</a>
+    </td>
+    <td class="simple" >
+    <b>D1</b>
+    </td>
+    <td class="simple" >
+    <a id=rad1>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    <a href="calc.htm#ad1c" >Separador horz. compensado</a>
+    </td>
+    <td class="simple" >
+    <b>Dc1</b>
+    </td>
+    <td class="simple" >
+    <a id=rad1c>-</a> mm
+    </td>
+   </tr>
+  </table>
+  <INPUT type=hidden name=height1val id=height1val>
+  <br clear=left>
+  <p>
+  <img src="qfh2am.jpg" align=left>
+  <b>Cuadro chico</b>
+   <table class="simple" cellspacing=1 style="width: 70%">
+    <tr >
+    <td class="simple" >
+    Largo total
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=total2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Caño vertical
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=vert2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Largo total compensado
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=total2c>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Caño vertical compensado
+    </td>
+    <td class="simple" >
+    <br>
+    </td>
+    <td class="simple" >
+    <a id=vert2c>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Altura antena
+    </td>
+    <td class="simple" >
+    <b>H2</b>
+    </td>
+    <td class="simple" >
+    <a id=height2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Diámetro interno
+    </td>
+    <td class="simple" >
+    <b>Di2</b>
+    </td>
+    <td class="simple" >
+    <a id=idiam2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Separador horizontal
+    </td>
+    <td class="simple" >
+    <b>D2</b>
+    </td>
+    <td class="simple" >
+    <a id=rad2>-</a> mm
+    </td>
+</tr>
+<tr >
+    <td class="simple" >
+    Separador horz. compensado
+    </td>
+    <td class="simple" >
+    <b>Dc2</b>
+    </td>
+    <td class="simple" >
+    <a id=rad2c>-</a> mm
+    </td>
+   </tr>
+  </table>
+  <INPUT type=hidden name=height2val id=height2val>
+  <br clear=left>
+  <h2 class="section">  Generar una plantilla de perforación</h2>
+  <p>
+  Para generar una plantilla de perforación en formato PDF,
+    ingrese los siguientes datos:  <p>
+   <table class="simple" cellspacing=1 class=simple cellspacing=1>
+    <tr >
+    <td class="simple" class=simple>
+    Diámetro caño soporte vertical:
+    </td>
+    <td class="simple" class=simple>
+    <input type=text name=xdiam size=10> mm
+    </td>
+    <td class="simple" class=simple>
+    <br>
+    </td>
+</tr>
+<tr >
+    <td class="simple" class=simple>
+    Diámetro caños soporte horizontal:
+    </td>
+    <td class="simple" class=simple>
+    <input type=text name=hdiam size=10> mm
+    </td>
+    <td class="simple" class=simple>
+    <br>
+    </td>
+</tr>
+<tr >
+    <td class="simple" class=simple>
+    Seleccionar tamaño del papel:
+    </td>
+    <td class="simple" class=simple>
+    <select papersize>
+  <option value="A4" selected>A4 (210x297 mm)
+  <option value="A3">A3 (297x420 mm)
+  <option value="A2">A2 (420x595 mm)
+  <option value="letter">carta
+  <option value="legal">legal
+</select>
+
+    </td>
+    <td class="simple" class=simple>
+    <input type=submit name=submit value=" Generar PDF ">
+    </td>
+   </tr>
+  </table>
+  Para ver gráficamente
+    al método de construcción que corresponde a las plantillas, visiten <a href="http://jcoppens.com/ant/qfh/fotos_pov.php" >esta página con imágenes</a>.  <p>
+  </form>
+  <h2 class="section">  <a name="ley"></a>
+  Leyenda</h2>
+  
+    Esta calculadora genera muchos datos! Hace falta un poco de atención
+    en la interpretación para no confundirse...
+    <p>
+    Las medidas mencionadas abajo significan lo siguiente:
+    <p>
+    <dl>
+      <dt><a name="freq"><b>Frequencia de diseño</b></a></dt>
+      <dd>Evidente?</dd>
+      <dt><a name="turns"><b>Cantidad de vueltas</b></a></dt>
+      <dd>Cuantos vueltas se torció la antena? (Normalmente (0.5 vueltas, ó 180 grados)</dd>
+      <dt><a name="nrwavel"><b>Largo de una vuelta</b></a></dt>
+      <dd>Hay varias implementaciones de esta antena:normalmente es de 1 largo de onda, pero también se puede construir con 1 1/2 y 2 largos de onda.</dd>
+      <dt><a name="wrad"><b>Radio de la curva</b></a></dt>
+      <dd>Ya que no es facil de doblar las esquinas perfectamente a 90 grados si utilizamos caño o coaxil, este valor (medido del centro de doblado hasta el centro del caño o coaxil) permite ajustar (compensar) las otras medidas.</dd>
+      <dt><a name="diam"><b>Diámetro del conductor</b></a></dt>
+      <dd>diámetro exterior del caño utilizado, o de la malla del coaxil.</dd>
+      <dt><a name="ratio"><b>Relación diámetro/altura</b></a></dt>
+      <dd>Relación entre el diámetro y la altura del cuadro. Frecuentemente 0.44, pero al disminuirlo, puede lograr mejor recepción en el horizonte (digamos 0.30 a 0.40).</dd>
+      <dt><a name="wavel"><b>Largo de onda</b></a></dt>
+      <dd>Largo de onda calculada de la frecuencia. </dd>
+      <dt><a name="wavelc"><b>Largo de onda (compensada)</b></a></dt>
+      <dd>Largo de onda calculada de la frecuencia. El valor compensado refleja el efecto del diámetro del conductor.</dd>
+      <dt><a name="bcorr"><b>Corrección por doblado</b></a></dt>
+      <dd>Valor de la corrección por doblado.</dd>
+      <dt><a name="total1"><b>Largo total del lazo</b></a></dt>
+      <dd>Largo total del conductor.</dd>
+      <dt><a name="total1c"><b>Largo total del lazo, compensado</b></a></dt>
+      <dd>Largo total (compensado)</b><dd>Circumferencia total del conductor del cuadro (largo del coaxil). El valor compensado indica el efecto del doblado, y la necesidad de aumentar el tamaño del cuadro levemente.</dd>
+      <dt><a name="vert1c"><b>Separación vertical (compensado)</b></a></dt>
+      <dd>Largo de uno de los conductores verticales. El valor compensado indica el tamaño del caño sin los 'codos'.</dd>
+      <dt><a name="ad1c"><b>Separador horz. (compensado)</b></a></dt>
+      <dd>El tamaño de la parte horizontal. Nuevamente el valor compensado resta el espacio ocupado por los codos. </dd>
+      <dt><a name="height1"><b>Altura antena</b></a></dt>
+      <dd>Altura del cuadro (ya torcida!).</dd>
+      <dt><a name="idiam1"><b>Diámetro interno</b></a></dt>
+      <dd>El diámetro del cylindro a usar para la confección de la helicoide.</dd>
+    </dl>
+  <hr>
+   <table width="100%">
+    <tr >
+    <td align=left>
+     <small>(c) John Coppens ON6JC/LW3HAZ</small>    </td>
+    <td align=right>
+     <a href="http://jcoppens.com/misc/mail.php" class=links><small>correo</small></a>    </td>
+   </tr>
+  </table>
+ </div>
+ </body>
+</html>

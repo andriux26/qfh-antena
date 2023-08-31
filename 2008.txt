@@ -1,0 +1,169 @@
+
+
+Universidad Cato'lica de Co'rdoba Facultad de Ingenieri'a Sistemas de Tiempo Real - An~o 2008 Titular: Ing. John Coppens Pra'cticos: Ing. Alejandro Butti
+
+1 Objetivos generales Comunicar a los estudiantes el concepto de ejecucio'n paralela de tareas, la comunicacio'n entre ellas, y la sincronizacio'n de las mismas. Aplicar los conocimientos en aplicaciones pra'cticas y lograr la aceptacio'n de los paradigmas de multiprocesamiento y procesamiento en tiempo real.
+
+2 Objetivos especi'ficos En la actualidad, aunque se utiliza multiprocesamiento y paralelismo comunmente, y aunque se considera el poder de procesamiento de ma'quinas modernas 'tiempo real', es necesario estudiar detenidamente las consecuencias y exigencias que tienen estos te'rminos en la vida real. Adema's regularmente sera' necesaria la capacidad de seleccionar el medio de computacio'n apropiado a la tarea.
+
+La materia muestra los efectos de estas te'cnicas, mediante conceptos teo'ricos, aplicaciones de alto nivel, y, en forma pra'ctica, con mo'dulos dida'cticos representando procesos industriales en forma realistica.
+
+3 Si'ntesis conceptual de la asignatura (Abstract) 3.1 Unidad 1 y 2 Introduccio'n: Terminologi'a Te'rminos ma's frecuentes, definicio'n de conceptos de concurrencia. Ejemplos sencillos en C, para mostrar las clases de concurrencia. Un ejemplo en assembler para microcontrolador de un microsistema concurrente.
+
+3.2 Unidad 3 Controladores PID Introduccio'n al control de procesos Algoritmo Proporcional/Integral/Diferencial. La necesidad fi'sica de una controlador que contenga los tres elementos.
+
+3.3 Unidad 4, 5 y 6 Pascal FC - Procesos Conceptos de procesos - secuenciales y concurrentes. Representacio'n matema'tica. Condiciones especiales y consecuencias. Estudio detallado de las herramientas cla'sicas de exclusio'n mutua y sincronizacio'n. Implementacio'n en Pascal-FC, discusio'n y resolucio'n de problemas.
+
+3.4 Unidad 6 Algunos ejemplos de uso en sistemas operativos comunes, y algunos ejemplos de sistemas operativos especi'ficamente desarrollados para concurrencia/tiempo real. Ejemplo de uso de PLC en la implementacio'n de control industrial.
+
+1
+
+4 Contenidos 4.1 Unidad 1 Terminologi'a Unidad - Terminologi'a - clasificacio'n de programas por funcionamiento: cooperativos - preemptivos, por respuesta: sincro'nicos - asincro'nicos, por punto de implementacio'n: hardware - firmware - sistema operativo - compilador - programa usuario.
+
+4.2 Unidad 2 La vida real Ejemplos sencillos de diferentes formas de concurrencia en C. Un ejemplo de un sistema concurrente sencillo en assembler para microcontroladores. Ejemplo de un sistema operativo preemptivo implementado en C.
+
+4.3 Unidad 3 Controladores PID Descripcio'n y abstraccio'n de un proceso industrial (histeresis, inercia, funcion de transferencia, estabilidad y otras caracteri'sticas de procesos) - realimentacio'n proporcional correccio'n de los errores mediante funcio'n integral - aumento de velocidad por funcio'n diferencial - motor simulado - ana'lisis del sistema completo realimentado. ?Cual es el efecto de cada uno? ?Y cuales son los problemas que producen? Criterio de estabilidad del lazo.
+
+Pascal FC Introduccio'n de Pascal-FC como herramienta dida'ctica. Descripcio'n del compilador, sintaxis, uso, limitaciones. Uso de la versio'n original DOS, y de la versio'n adaptada en la Universidad para uso bajo Windows, y otra versio'n para Linux. Extensiones al idioma realizados para el control de los mo'dulos dida'cticos.
+
+4.4 Unidad 4 Procesos de tiempo real El concepto de proceso - estructuras de procesos - representacio'n en Pascal-FC - representacio'n simbo'lica - consecuencias de concurrencia.
+
+4.5 Unidad 5 Exclusion mutua y sincronizacio'n La necesidad de comunicacio'n entre procesos - y los problemas. Mensajeri'a sincro'nica. Sem'aforos. Regiones cri'ticas y monitores.
+
+4.6 Unidad 6 Otra vez, la vida real Comparacio'n de la implementacio'n de exclusio'n mutua y sincronizacio'n en sistemas de la vida real: sistemas operativos e idiomas. Herramientas comerciales disponibles, comparacion. Como se implementa control de procesos en la industria: introduccio'n a los PLC.
+
+Introduccio'n al control de procesos Algoritmo Proporcional/Integral/Diferencial. La necesidad fi'sica de una controlador que contenga los tres elementos.
+
+Conceptos de procesos - secuenciales y concurrentes. Representacio'n matema'tica. Condiciones especiales y consecuencias.
+
+- representacio'n en Pascal-FC - representacio'n simbo'lica - consecuencias de concurrencia.
+
+5 Bibliografi'a 5.1 Bibliografi'a obligatoria
+
+* Concurrent Programming Allan Burns,
+
+Geoff Davies, Addison Wesley, ISBN 0-201-54417-2
+
+* Modern Operating Systems
+
+Andrew S. Tanenbaum, Prentice Hall, ISBN 0-13-588187-0
+
+2
+
+* Material dida'ctico para la materia
+
+John Coppens, Sitio material dida'ctico http://www.jcoppens.com/univ/treal
+
+5.2 Bibliografi'a de consulta
+
+* Algorithms + Data Structures = Programs
+
+Niklaus Wirth, Prentice Hall, Inc., ISBN 0-13-022418-9
+
+* Programming and Problem Solving with Pascal
+
+Michael Schneider, Steven Weingart, David Perlman, John Wiley, ISBN 0-471-08216-3
+
+* Advanced Programming and Problem Solving with Pascal
+
+Michael Schneider, Steven Bruell, John Wiley, ISBN 0-471-01128-2
+
+* Advanced Programming in the UNIX Environment
+
+Richard Stevens, Addison Wesley, ISBN 0-201-56317-7
+
+* Writing Windows Virtual Device Drivers
+
+David Thielen, Bryan Woodruff, Addison Wesley, ISBN 0-201-48921-X
+
+* Beginning Linux Programming
+
+Neil Matthew, Rick Stones, Wrox Press Ltd, ISBN 1-874416-68-0
+
+* Linux Device Drivers, 2nd edition
+
+Alessandro Rubini, Jonathan Corbet, O'Reilly, ISBN 0-596-00008-1
+
+6 Metodologi'a El aspecto teo'rico sera' presentado con exposiciones dida'cticas, con e'mfasis sobre la implementacio'n de ejemplos. La mayori'a de los ejemplos se realizara'n mediante Pascal-FC, pero casos donde sea ma's apropiado, se utilizara'n otros medios.
+
+En particular, la parte pra'ctica del curso se dedicara' a implementar trabajos bajo condiciones reales:
+
+1. Estudio de un sistema operativo dida'ctico en C 2. Implementacio'n de un protocolo de comunicacio'n 3. Estudio e implementacio'n de algoritmo's PID 4. Control de mo'dulos dida'cticos
+
+7 Calendario 7.1 Teo'rico
+
+3
+
+Fecha Clase Unidad Tema/actividad
+
+11/03 1 Introduccio'n a la materia - Organizacio'n del curso - Documentacio'n,
+
+pra'cticos, exigencias - Medios de comunicacio'n (e-mail, lista de discusio'n, pa'gina web) 18/03 2 1 Terminologi'a - Conceptos ba'sicos de que' son los sistemas de tiempo
+
+real. 25/03 3 2 La vida real - Un ejemplo de extrema sencillez de un sistema de tiempo
+
+real, implementado en assembler. Elementos ba'sicos - elemento tiempo, sincronizacio'n. 01/04 4 2 La vida real - Ma's complicado: sistemas cooperativos/preemptivos.
+
+Comparacio'n de sistemas operativos de tiempo real comerciales. 08/04 5 3 Controladores PID - el elemento de control ba'sico para controlar procesos industriales. Como se comportan procesos industriales. Significado fi'sico de los para'metros, y como eliminarlos. Problemas del muestreo. Estabilidad de un lazo de control. 15/04 6 4 Pascal FC. Descripcio'n del idioma, y diferentes implementaciones, para
+
+DOS, Windows, y Linux. Extensiones agregados para controlar los mo'dulos dida'cticos. 22/04 7 5 Procesos: el concepto de ejecucio'n en paralelo, de la independencia
+
+entre procesos. 29/04 8 Primer parcial 06/05 9 6 Exclusio'n mutua y sincronizacio'n, Elementos originales: Variables
+
+globales para resolver problemas de zonas cri'ticas. Sema'foros binarios y genericos. Operaciones permitidas. Implementacio'n de buffers. 13/05 10 6 Exclusio'n mutua y sincronizacio'n: Mas avanzados: Comunicacio'n entre
+
+procesos para implementar sincronizacio'n y exclusio'n mutua, via uso de canales. 20/05 11 6 Exclusio'n mutua y sincronizacio'n: Invocacion remota, monitores 27/05 12 6 Exclusio'n mutua y sincronizacio'n: Unificado con recursos. 03/06 13 6 Otra vez, la vida real: Como se implementan estos sistemas en herramientas comerciales? Cuales compiladores esta'n disponibles, comparacio'n. 10/06 14 7 Segundo parcial 17/06 15 7 Revisacio'n de la materia (y recuperatorio)
+
+4
+
+7.2 Pra'cticos
+
+Fecha Clase Unidad Descripcio'n
+
+14/03 1 Presentacio'n Personal y de los objetivos y alcances de la parte practica
+
+en la materia. Introduccio'n al trabajo pra'ctico a desarrollar durente el an~o 21/03 Viernes Santo 28/03 2 1 Desarrollos de Conceptos ba'sicos sobre el trabajo de Cecilia Tamagusuku para implementar un sistema concurrente 04/04 3 2 Finalizar la explicacio'n del desarrollo del SO de Cecilia Tamagusuku.
+
+Solicitud del 1er trabajo pra'ctico 11/04 4 Revisio'n sobre el TP 1. Y reafirmacio'n de conceptos en base a ese TP
+
+desarrollado 18/04 5 3 Introduccio'n al TP2, refrescando conceptos de algoritmo para PID. Explicacio'n sobre el TP2 a desarrollar. 25/04 6 Revisio'n sobre el TP2. Revisando conceptos de lazo de control PID. 02/05 7 5 Explicacio'n del protocolo de comunicacio'n con los mo'dulos pra'cticos.
+
+Explicacio'n del comportamiento de cada uno de los mo'dulos. Solicitud del TP3. 09/05 8 Inspeccio'n del TP3 verificando posibles problemas con el protocolo de
+
+comunicacio'n y verificando conceptos sobre el lazo de control PID 16/05 9 Resumen de los TP realizados hasta el momento reafirmando conceptos
+
+ba'sicos. Introduccio'n al u'ltimo TP. Del an~o 23/06 10 Clase de consulta sobre el TP4 y revisio'n de lo realizado hasta el momento 30/05 11 Entrega del TP4 finalizado. Revisio'n de los conceptos ba'sicos y su implementacio'n. 13/06 12 6 Introduccio'n a los conceptos ba'sicos de PLC. Visualizacio'n de videos
+
+de la aplicacio'n de estos elementos en la industria. 20/06 15 Ultimo plazo para entrega y revisio'n del TP4. Definicio'n de la regularidad del alumno
+
+8 Trabajos pra'cticos Para la parte teo'rica: resolucio'n de problemas de concurrencia, principalmente utilizando el compilador Pascal-FC, para evaluar la comprensio'n de la materia y de los conceptos.
+
+Para la parte pra'ctica en si': estudio de un sistema operativo de tiempo real preemptivo (en su momento desarrollado por alumnas de la Universidad). Adicio'n de tareas simples al sistema operativo. Desarrollo de un controlador para procesos industriales. E'nfasis sobre la programacio'n estructurada. Simulacio'n de un motor. Implementacio'n del a algoritmo PID. Comunicacio'n con lo mo'dulos dida'cticos. Graficacio'n.
+
+9 Criterios y formas de evaluacio'n 9.1 Durante el semestre Tanto en la parte teo'rica como en la parte pra'ctica, se presentara'n 4 trabajos durante el semestre. Estos trabajos se evaluara'n por su: originalidad (~30%), solide'z de implementacio'n (~30%), estructura (~20%), documentacio'n (~20%).
+
+Se considera importante en la documentacio'n, que conste de:
+
+* Descripcio'n del problema. ('La tarea')
+
+* Ana'lisis del problema. ('Como se sugiere solucionarlo')
+
+5
+
+* Descripcio'n de la solucio'n. En la descripcio'n no se trata necesariamente de un reporte
+
+verboso, sino de una representacio'n sinte'tica de la solucio'n adoptada.
+
+* Relato de problemas encontrados, y las soluciones propuestas y/o realizadas.
+
+9.2 Parciales En la parte teo'rica se realizara'n adema's dos parciales, evaluando el conocimiento sobre la materia en forma individual. Si se considera conveniente, se reemplezara'n el parcial por un trabajo pra'ctico, si esto es mas conveniente para permitir mayor creatividad y aplicacio'n de los conocimientos. En tal caso, se hara' una evaluacio'n personalizada de los resultado.
+
+En las notas finales se agregara' una evaluacio'n del la participacio'n del alumno en las actividades.
+
+9.3 Final El examen final teo'rico consistira' en dos partes: una evlucio'n de los conocimientos teo'ricos de la materi'a y una confirmacio'n individual de la participacio'n en la realizacio'n de los trabajos presentados.
+
+El responsable de la parte pra'ctica, se encargara' de la misma manera de evaluar los conocimientos absolutos e individuales de los alumnos.
+
+10 Condiciones para obtener la regularidad Las condiciones formales son las que actualmente rigen para todas las ca'tedras, segu'n el reglamento vigente.
+
+6
